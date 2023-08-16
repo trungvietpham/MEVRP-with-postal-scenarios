@@ -1,3 +1,13 @@
+# Data
+data
+
+# tmp file
+bitmasking_try.ipynb
+check_real.ipynb
+port_data.ipynb
+try*.ipynb
+analytics.ipynb
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
