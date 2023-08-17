@@ -218,7 +218,9 @@ class Delivery:
             # input('remain')
             for j in range(end_index+1):
                 current_demand+=remain_demand[j]
-                percentage.append(current_demand/self.vehicle_list[vehicle_id][0])
+                if self.vehicle_list[vehicle_id][0]>0: percentage.append(current_demand/self.vehicle_list[vehicle_id][0])
+                else: percentage.append(0)
+                if percentage[-1] >1: percentage[-1]=1
             percentage_res.append(np.mean(percentage))
             # print(percentage)
             # input('percentage')
@@ -228,7 +230,8 @@ class Delivery:
             dis = self.get_route_length(child_routes, vehicle_list[vehicle_id][1])
             # dis += self.distance_matrix[int(self.code_map[child_routes[-1]])][int(self.code_map[list(self.return_node.keys())[0]])]
             distance_res.append(dis)
-            cost_res.append(distance_res[-1] * vehicle_list[vehicle_id][0]/percentage_res[-1])
+            if percentage_res[-1] <0.01: cost_res.append(distance_res[-1] * vehicle_list[vehicle_id][0]/0.01)
+            else: cost_res.append(distance_res[-1] * vehicle_list[vehicle_id][0]/percentage_res[-1])
             if end_index >= len(remain_demand) - 1: break
             # if remain_demand[end_index] == demand_by_routes[-1]: break
             remain_route = [fix_start_node] + remain_route[end_index+1:]
